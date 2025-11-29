@@ -3,6 +3,8 @@ import "dotenv/config";
 import cors from "cors";
 import http from 'http';
 import { connectDB } from "./lib/db.js";
+import userRouter from "./routes/userRoutes.js";
+import messageRouter from "./routes/messageRoute.js";
 
 
 const app = exprees();
@@ -14,6 +16,8 @@ app.use(exprees.json({limit: "4mb"}));
 app.use(cors());
 
 app.use("/ap/status",(req,res)=>res.send("OK"));
+app.use("/api/auth",userRouter );
+app.use("/api/messages",messageRouter );
 
 await connectDB();
 
